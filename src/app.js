@@ -5,7 +5,7 @@ let config = require('../config/local')
 let app = express();
 
 app.use(bodyParser.json());
-app.listen(config.port);
+app.listen(process.env.PORT || config.port);
 
 let taskList = [];
 
