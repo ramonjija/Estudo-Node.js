@@ -1,7 +1,7 @@
 let express = require('express');
 let app = express();
 
-const port = 8082;
+const port = (process.env.PORT || 8082);
 
 app.use(requestListener).listen(port);
 console.log('Listening on port '+ port)
