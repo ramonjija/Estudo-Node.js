@@ -19,7 +19,7 @@ app.post('/task', [validationMiddleware, function(req, res) {
     res.send(taskList);
 }]);
 
-app.put('/task/:task_index',[validationMiddleware, function(req, res) {
+app.put('/task/:task_index', [validationMiddleware, function(req, res) {
     let taskIndex = req.params.task_index;
     taskList[taskIndex] = req.body.task;
     res.send(taskList);
