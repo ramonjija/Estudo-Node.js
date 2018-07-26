@@ -19,5 +19,9 @@
     "lodash": "^4.17.10",
     "mocha": "^5.2.0",
     "request": "^2.87.0"
+  },
+  "dependencies": {
+    "mongoose": "^5.2.5",
+    "underscore": "^1.9.1"
   }
 }
