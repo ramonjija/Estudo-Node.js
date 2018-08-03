@@ -9,6 +9,10 @@ const auth = require('./middlewares/auth');
 const express = require('express');
 const app = express();
 
+//Engines
+app.set('view engine', 'pug');
+app.set('views', './views');
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('../public'));
@@ -45,7 +49,7 @@ const courses = [
 ]
 
 app.get('/', (req, res) => {
-    res.send("Hello World");
+   res.render('index', {title: 'My Express App', message: 'Hellooooo @_@'})
 });
 
 app.get('/api/courses', (req, res) => {
