@@ -21,6 +21,7 @@ console.log(`Mail Password ${config.get('mail.password')}`);
 
 if(app.get('env') === 'development') {
     app.use(morgan('tiny'));
+    //Deve-se setar a variavel de ambiente set DEBUG=app.* para funcionar
     startupDebugger('Morgan enabled...');
 }
 app.use(logger);
