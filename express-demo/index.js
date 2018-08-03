@@ -1,3 +1,5 @@
+const startupDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db');
 const config = require('config');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -7,7 +9,6 @@ const auth = require('./middlewares/auth');
 const express = require('express');
 const app = express();
 
-//Middleware Setting
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('../public'));
@@ -20,11 +21,12 @@ console.log(`Mail Password ${config.get('mail.password')}`);
 
 if(app.get('env') === 'development') {
     app.use(morgan('tiny'));
-    console.log('Morgan enabled...');
+    startupDebugger('Morgan enabled...');
 }
 app.use(logger);
 app.use(auth);
 
+dbDebugger('Logging database stuff');
 
 const courses = [
     { 
