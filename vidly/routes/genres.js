@@ -1,18 +1,14 @@
-const express = require('express');
 const Joi = require('joi');
-
-const app = express();
-app.use(express.json());
-
-const port = process.env.PORT || 8082;
+const express = require('express');
+const router = express.Router();
 
 var genres = [];
 
-app.get('/api/genres', (req, res) => {
+router.get('/', (req, res) => {
     res.send(genres);
 });
 
-app.post('/api/genres', (req, res) => {
+router.post('/', (req, res) => {
     let { error } = validateGenres(req.body);
     if(error)
         return res.status(400).send(error.details[0].message);
@@ -26,7 +22,7 @@ app.post('/api/genres', (req, res) => {
     res.send(genre);
 });
 
-app.put('/api/genres/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     let { error } = validateGenres(req.body);
     if(error)
         return res.status(400).send(error.details[0].message);
@@ -44,7 +40,7 @@ app.put('/api/genres/:id', (req, res) => {
 
 });
 
-app.delete('/api/genres/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     let id = parseInt(req.params.id);
 
     let genre = genres.find(c => c.id === id);
@@ -66,10 +62,4 @@ function validateGenres(genre) {
     return Joi.validate(genre, schema);
 }
 
-
-
-
-
-app.listen(port, () => {
-    console.log(`Listenning on port ${port}`);
-});
+module.exports = router;
