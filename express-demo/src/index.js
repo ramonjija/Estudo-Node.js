@@ -1,8 +1,14 @@
 const Joi = require('joi');
+const logger = require('../middlewares/logger')
+const auth = require('../middlewares/auth');
 const express = require('express');
 const app = express();
 
+//Middleware Setting
 app.use(express.json());
+app.use(logger);
+app.use(auth);
+
 
 const courses = [
     { 
@@ -24,9 +30,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/courses', (req, res) => {
-    let { error } = validateCourses(req.body);
-    if(error) 
-        return res.status(400).send(error.details[0].message);
     res.send(courses);
 });
 
