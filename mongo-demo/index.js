@@ -78,6 +78,29 @@ async function getCourses() {
     console.log(courses);
 }
 
+//Querying first
+async function updateCourse(id) {
+    const course = await Course.findById(id);
+    if(!course) return;
+    course.author = 'Another Author';
+    course.isPublished = true;
+    const result = await course.save();
+    console.log(result);
+}
+//Document First
+
+async function updateCourseDocumentFirst(id) {
+    const course = await Course.findByIdAndUpdate(id, {
+        $set:{
+            author: 'Mosh',
+            isPublished: true
+        }
+    }, 
+    {new: true});
+    console.log(course);
+}
+
 // createCourse();
-getCourses();
+// updateCourse('5b71a9bc8316d35d50ebbed3');
+updateCourseDocumentFirst('5b71a9bc8316d35d50ebbed3');
 
