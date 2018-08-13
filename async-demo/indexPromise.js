@@ -22,9 +22,6 @@ async function DisplayCommits() {
   }
 }
 DisplayCommits();
-  
-
-
 
 function getUser(id) {
   return new Promise((resolve, reject) => {
