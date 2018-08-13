@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost/playground')
     });
 
 const courseSchema = mongoose.Schema({
-    name: String,
+    name: { type: String, required: true },
     author: String,
     tags: [ String ],
     date: { type: Date, default: Date.now },
@@ -18,13 +18,17 @@ const Course = mongoose.model('Course', courseSchema);
 
 async function createCourse() {
     const course = new Course({
-        name:'Node.JS Course',
+        // name:'Node.JS Course',
         author:'Mosh',
         tags: ['Node.JS', 'Backend'],
         isPublished: true
     });
-    const result = await course.save();
-    console.log(result);
+    try{
+        const result = await course.save();
+        console.log(result);
+    } catch (err) {
+        console.error(err.message);
+    }
 }
 
 
@@ -107,8 +111,8 @@ async function deleteCourse(id) {
     console.log(course);
 }
 
-// createCourse();
+createCourse();
 // updateCourse('5b71a9bc8316d35d50ebbed3');
 // updateCourseDocumentFirst('5b71a9bc8316d35d50ebbed3');
-deleteCourse('5b71a9bc8316d35d50ebbed3');
+//deleteCourse('5b71f0163d3eaa542cab42e1');
 
