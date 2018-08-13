@@ -8,11 +8,29 @@ mongoose.connect('mongodb://localhost/playground')
     });
 
 const courseSchema = mongoose.Schema({
-    name: { type: String, required: true },
+    name: { 
+            type: String, 
+            required: true,
+            minlength: 5,
+            maxlength: 255
+            // match: /pattern/
+    },
     author: String,
     tags: [ String ],
     date: { type: Date, default: Date.now },
-    isPublished: Boolean
+    isPublished: Boolean,
+    price: {
+        type: Number,
+        require: function() {
+            return this.isPublished;
+        },
+        min: 10,
+        max: 200
+    },
+    category: {
+        required: true,
+        enum: ['web','mobile','network']
+    }
 });
 const Course = mongoose.model('Course', courseSchema);
 
