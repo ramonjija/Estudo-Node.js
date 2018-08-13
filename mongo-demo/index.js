@@ -100,7 +100,15 @@ async function updateCourseDocumentFirst(id) {
     console.log(course);
 }
 
+async function deleteCourse(id) {
+    // const course = await Course.deleteOne({_id: id});
+    const course = await Course.findByIdAndRemove(id);
+
+    console.log(course);
+}
+
 // createCourse();
 // updateCourse('5b71a9bc8316d35d50ebbed3');
-updateCourseDocumentFirst('5b71a9bc8316d35d50ebbed3');
+// updateCourseDocumentFirst('5b71a9bc8316d35d50ebbed3');
+deleteCourse('5b71a9bc8316d35d50ebbed3');
 
